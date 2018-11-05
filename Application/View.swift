@@ -1,12 +1,14 @@
 import UIKit
 
 class View:UIViewController {
+    private let presenter = Presenter()
     private weak var indicator:UIActivityIndicatorView!
     private weak var message:UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         makeOutlets()
+        presenter.refresh()
     }
     
     private func makeOutlets() {
