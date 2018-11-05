@@ -1,7 +1,7 @@
 import Foundation
 
 class Presenter {
-    func refresh() {
+    @objc func refresh() {
         
     }
 }
