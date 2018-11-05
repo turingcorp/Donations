@@ -7,9 +7,13 @@ public class Donations {
     public init() { }
     
     public func refresh() {
-        requester.refresh { list in
+        requester.refresh(success: { list in
             DispatchQueue.main.async { [weak self] in
                 self?.delegate?.refreshed(list:list)
+            }
+        }) { error in
+            DispatchQueue.main.async { [weak self] in
+                self?.delegate?.donations(error:error)
             }
         }
     }

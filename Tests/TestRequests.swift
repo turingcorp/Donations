@@ -27,4 +27,15 @@ class TestRequests:XCTestCase {
         DispatchQueue.global(qos:.background).async { self.donations.refresh() }
         waitForExpectations(timeout:1)
     }
+    
+    func testExceptionNotifiesDelegate() {
+        let expect = expectation(description:String())
+        requester.error = Exception.invalidHTTPcode
+        delegate.onDonationsError = {
+            XCTAssertEqual(Thread.main, Thread.current)
+            expect.fulfill()
+        }
+        DispatchQueue.global(qos:.background).async { self.donations.refresh() }
+        waitForExpectations(timeout:1)
+    }
 }

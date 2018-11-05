@@ -4,9 +4,14 @@ import Foundation
 class MockRequester:RequesterProtocol {
     var onRefresh:(() -> Void)?
     var list = List(items:[])
+    var error:Error?
     
-    func refresh(success:@escaping((List) -> Void)) {
+    func refresh(success:@escaping((List) -> Void), fail:@escaping((Error) -> Void)) {
         onRefresh?()
-        success(list)
+        if let error = error {
+            fail(error)
+        } else {
+            success(list)
+        }
     }
 }

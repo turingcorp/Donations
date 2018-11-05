@@ -14,14 +14,26 @@ class Requester:RequesterProtocol {
         self.request = request
     }
     
-    func refresh(success:@escaping((List) -> Void)) {
+    func refresh(success:@escaping((List) -> Void), fail:@escaping((Error) -> Void)) {
         task?.cancel()
         task = session.dataTask(with:request) { data, response, error in
-            guard
-                let data = data,
-                let list = try? JSONDecoder().decode(List.self, from:data)
-            else { return }
-            success(list)
+            if let error = error {
+                fail(error)
+            } else if (response as? HTTPURLResponse)?.statusCode != 200 {
+                fail(Exception.invalidHTTPcode)
+            } else if let data = data {
+                if data.isEmpty {
+                    fail(Exception.emptyResponse)
+                } else {
+                    do {
+                        success(try JSONDecoder().decode(List.self, from:data))
+                    } catch let jsonError {
+                        fail(jsonError)
+                    }
+                }
+            } else {
+                fail(Exception.invalidResponse)
+            }
         }
         task?.resume()
     }
