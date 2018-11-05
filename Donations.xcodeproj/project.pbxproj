@@ -10,6 +10,13 @@
 		DA3C55AF2190F2CC0087301D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3C55AE2190F2CC0087301D /* Item.swift */; };
 		DA3C55B12190F49D0087301D /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3C55B02190F49D0087301D /* Button.swift */; };
 		DA3C55B32190F4C10087301D /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3C55B22190F4C10087301D /* Action.swift */; };
+		DA3C55B52190F7C20087301D /* TestRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3C55B42190F7C20087301D /* TestRequests.swift */; };
+		DA3C55B72190FB080087301D /* Donations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3C55B62190FB080087301D /* Donations.swift */; };
+		DA3C55B92190FB180087301D /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3C55B82190FB180087301D /* Delegate.swift */; };
+		DA3C55BB2190FB330087301D /* RequesterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3C55BA2190FB330087301D /* RequesterProtocol.swift */; };
+		DA3C55BD2190FB420087301D /* Requester.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3C55BC2190FB420087301D /* Requester.swift */; };
+		DA3C55BF2190FD720087301D /* MockRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3C55BE2190FD720087301D /* MockRequester.swift */; };
+		DA3C55C12190FD8D0087301D /* MockDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3C55C02190FD8D0087301D /* MockDelegate.swift */; };
 		DA7E58F32190E44E007B977A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA7E58F02190E44D007B977A /* Localizable.strings */; };
 		DA7E58F42190E44E007B977A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7E58F22190E44D007B977A /* LaunchScreen.storyboard */; };
 		DA7E58F72190E57C007B977A /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7E58F62190E57C007B977A /* Application.swift */; };
@@ -46,6 +53,13 @@
 		DA3C55AE2190F2CC0087301D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		DA3C55B02190F49D0087301D /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		DA3C55B22190F4C10087301D /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		DA3C55B42190F7C20087301D /* TestRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRequests.swift; sourceTree = "<group>"; };
+		DA3C55B62190FB080087301D /* Donations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donations.swift; sourceTree = "<group>"; };
+		DA3C55B82190FB180087301D /* Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegate.swift; sourceTree = "<group>"; };
+		DA3C55BA2190FB330087301D /* RequesterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequesterProtocol.swift; sourceTree = "<group>"; };
+		DA3C55BC2190FB420087301D /* Requester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requester.swift; sourceTree = "<group>"; };
+		DA3C55BE2190FD720087301D /* MockRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRequester.swift; sourceTree = "<group>"; };
+		DA3C55C02190FD8D0087301D /* MockDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDelegate.swift; sourceTree = "<group>"; };
 		DA7E58EC2190E1F6007B977A /* libDonations.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDonations.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA7E58ED2190E1F6007B977A /* Application.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Application.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA7E58F12190E44D007B977A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -117,6 +131,9 @@
 			isa = PBXGroup;
 			children = (
 				DA7E58F92190E5AA007B977A /* TestParsing.swift */,
+				DA3C55B42190F7C20087301D /* TestRequests.swift */,
+				DA3C55BE2190FD720087301D /* MockRequester.swift */,
+				DA3C55C02190FD8D0087301D /* MockDelegate.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -124,6 +141,10 @@
 		DA7E58FB2190E5BD007B977A /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				DA3C55B62190FB080087301D /* Donations.swift */,
+				DA3C55B82190FB180087301D /* Delegate.swift */,
+				DA3C55BA2190FB330087301D /* RequesterProtocol.swift */,
+				DA3C55BC2190FB420087301D /* Requester.swift */,
 				DA7E58FC2190E5BD007B977A /* List.swift */,
 				DA3C55AE2190F2CC0087301D /* Item.swift */,
 				DA3C55B02190F49D0087301D /* Button.swift */,
@@ -258,8 +279,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA3C55B92190FB180087301D /* Delegate.swift in Sources */,
+				DA3C55BB2190FB330087301D /* RequesterProtocol.swift in Sources */,
+				DA3C55BD2190FB420087301D /* Requester.swift in Sources */,
 				DA3C55AF2190F2CC0087301D /* Item.swift in Sources */,
 				DA3C55B32190F4C10087301D /* Action.swift in Sources */,
+				DA3C55B72190FB080087301D /* Donations.swift in Sources */,
 				DA3C55B12190F49D0087301D /* Button.swift in Sources */,
 				DA7E58FD2190E5BD007B977A /* List.swift in Sources */,
 			);
@@ -270,6 +295,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA7E58FA2190E5AA007B977A /* TestParsing.swift in Sources */,
+				DA3C55B52190F7C20087301D /* TestRequests.swift in Sources */,
+				DA3C55C12190FD8D0087301D /* MockDelegate.swift in Sources */,
+				DA3C55BF2190FD720087301D /* MockRequester.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
