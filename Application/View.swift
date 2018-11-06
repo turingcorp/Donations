@@ -22,12 +22,19 @@ class View:UIViewController, UICollectionViewDelegate, UICollectionViewDataSourc
         collection.collectionViewLayout.invalidateLayout()
     }
     
+    func scrollViewDidEndDecelerating(_:UIScrollView) {
+        let centre = CGPoint(x:view.bounds.midX + collection.contentOffset.x, y:view.bounds.midY)
+        if let index = collection.indexPathForItem(at:centre) {
+            collection.scrollToItem(at:index, at:.centeredHorizontally, animated:true)
+        }
+    }
+    
     func collectionView(_:UICollectionView, numberOfItemsInSection:Int) -> Int {
         return items.count
     }
     
     func collectionView(_:UICollectionView, layout:UICollectionViewLayout, sizeForItemAt:IndexPath) -> CGSize {
-        return collection.bounds.size
+        return CGSize(width:view.bounds.width - 50, height:collection.bounds.height - 40)
     }
     
     func collectionView(_:UICollectionView, cellForItemAt index:IndexPath) -> UICollectionViewCell {
@@ -75,17 +82,17 @@ class View:UIViewController, UICollectionViewDelegate, UICollectionViewDataSourc
         
         let flow = UICollectionViewFlowLayout()
         flow.sectionInset = UIEdgeInsets(top:20, left:20, bottom:20, right:20)
-        flow.minimumLineSpacing = 0
-        flow.minimumInteritemSpacing = 10
+        flow.minimumLineSpacing = 10
+        flow.minimumInteritemSpacing = 0
         flow.scrollDirection = .horizontal
         
         let collection = UICollectionView(frame:.zero, collectionViewLayout:flow)
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.backgroundColor = .clear
         collection.alwaysBounceHorizontal = true
-        collection.isPagingEnabled = true
         collection.delegate = self
         collection.dataSource = self
+        collection.showsHorizontalScrollIndicator = false
         collection.register(Cell.self, forCellWithReuseIdentifier:"cell")
         view.addSubview(collection)
         self.collection = collection

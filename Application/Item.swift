@@ -5,7 +5,7 @@ class Item {
     var donateHidden = true
     var facebookHidden = true
     var refreshHidden = true
-    var text = String()
+    var text = NSAttributedString()
     var donateMessage = String()
     var facebookMessage = String()
     var refreshMessage = String()
