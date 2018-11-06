@@ -30,7 +30,7 @@ class Presenter:Delegate {
     }
     
     func donations(error:Error) {
-        
+        update?(failed(error:error))
     }
     
     private func loading() -> ViewModel {
@@ -40,8 +40,19 @@ class Presenter:Delegate {
         return viewModel
     }
     
-    private func error() -> ViewModel {
+    private func failed(error:Error) -> ViewModel {
         var viewModel = ViewModel()
+        viewModel.refreshHidden = false
+        switch error {
+        case Exception.emptyResponse:
+            viewModel.message = NSLocalizedString("Error.emptyResponse", comment:String())
+        case Exception.invalidHTTPcode:
+            viewModel.message = NSLocalizedString("Error.invalidHTTPcode", comment:String())
+        case Exception.invalidResponse:
+            viewModel.message = NSLocalizedString("Error.invalidResponse", comment:String())
+        default:
+            viewModel.message = error.localizedDescription
+        }
         return viewModel
     }
     

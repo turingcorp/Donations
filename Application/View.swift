@@ -75,18 +75,6 @@ class View:UIViewController, UICollectionViewDelegate, UICollectionViewDataSourc
         view.addSubview(message)
         self.message = message
         
-        let refresh = UIButton()
-        refresh.translatesAutoresizingMaskIntoConstraints = false
-        refresh.backgroundColor = .black
-        refresh.setTitle(NSLocalizedString("View.refresh", comment:String()), for:[])
-        refresh.setTitleColor(.white, for:.normal)
-        refresh.setTitleColor(UIColor(white:1, alpha:0.2), for:.highlighted)
-        refresh.layer.cornerRadius = 6
-        refresh.titleLabel!.font = .systemFont(ofSize:16, weight:.bold)
-        refresh.isHidden = true
-        view.addSubview(refresh)
-        self.refresh = refresh
-        
         let flow = UICollectionViewFlowLayout()
         flow.sectionInset = UIEdgeInsets(top:20, left:20, bottom:20, right:20)
         flow.minimumLineSpacing = 10
@@ -104,6 +92,19 @@ class View:UIViewController, UICollectionViewDelegate, UICollectionViewDataSourc
         collection.register(Cell.self, forCellWithReuseIdentifier:"cell")
         view.addSubview(collection)
         self.collection = collection
+        
+        let refresh = UIButton()
+        refresh.translatesAutoresizingMaskIntoConstraints = false
+        refresh.backgroundColor = .black
+        refresh.setTitle(NSLocalizedString("View.refresh", comment:String()), for:[])
+        refresh.setTitleColor(.white, for:.normal)
+        refresh.setTitleColor(UIColor(white:1, alpha:0.2), for:.highlighted)
+        refresh.layer.cornerRadius = 6
+        refresh.titleLabel!.font = .systemFont(ofSize:16, weight:.bold)
+        refresh.isHidden = true
+        refresh.addTarget(presenter, action:#selector(presenter.refresh), for:.touchUpInside)
+        view.addSubview(refresh)
+        self.refresh = refresh
         
         indicator.centerXAnchor.constraint(equalTo:view.centerXAnchor).isActive = true
         indicator.centerYAnchor.constraint(equalTo:view.centerYAnchor).isActive = true

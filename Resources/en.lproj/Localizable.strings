@@ -3,3 +3,6 @@ View.continueButton="Continue";
 View.alert="Donations";
 Presenter.loading="Loading, please wait...";
 Presenter.donatedMessage="Thank you for your donation!";
+Error.invalidResponse="Invalid server response, please try again.";
+Error.invalidHTTPcode="Couldn't reach server, please try again.";
+Error.emptyResponse="Can't communicate with the server, please try again.";
