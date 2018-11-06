@@ -3,7 +3,10 @@ import Donations
 
 class Presenter:Delegate {
     var update:((ViewModel) -> Void)?
+    var open:((URL) -> Void)?
+    var alert:((String) -> Void)?
     private let donations = Donations()
+    private static let facebook = "https://facebook.com"
     
     init() {
         donations.delegate = self
@@ -12,6 +15,14 @@ class Presenter:Delegate {
     @objc func refresh() {
         update?(loading())
         donations.refresh()
+    }
+    
+    func donate() {
+        alert?(NSLocalizedString("Presenter.donatedMessage", comment:String()))
+    }
+    
+    func facebook() {
+        open?(URL(string:Presenter.facebook)!)
     }
     
     func refreshed(list:List) {

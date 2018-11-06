@@ -2,6 +2,7 @@ import UIKit
 
 class Cell:UICollectionViewCell {
     weak var item:Item? { didSet { updateViewModel() } }
+    weak var presenter:Presenter?
     private weak var indicator:UIActivityIndicatorView!
     private weak var imageView:UIImageView!
     private weak var text:UILabel!
@@ -47,6 +48,9 @@ class Cell:UICollectionViewCell {
         donate.layer.cornerRadius = 50
         donate.layer.borderColor = UIColor.black.cgColor
         donate.layer.borderWidth = 1
+        donate.addTarget(self, action:#selector(actionDonate), for:.touchUpInside)
+        donate.addTarget(self, action:#selector(donateHighlighted), for:[.touchDown])
+        donate.addTarget(self, action:#selector(donateStandby), for:[.touchCancel, .touchUpOutside, .touchDragExit])
         contentView.addSubview(donate)
         self.donate = donate
         
@@ -57,6 +61,7 @@ class Cell:UICollectionViewCell {
         refresh.setTitleColor(UIColor(white:0, alpha:0.2), for:.highlighted)
         refresh.layer.cornerRadius = 14
         refresh.titleLabel!.font = .systemFont(ofSize:11, weight:.bold)
+        refresh.addTarget(self, action:#selector(actionRefresh), for:.touchUpInside)
         contentView.addSubview(refresh)
         self.refresh = refresh
         
@@ -67,6 +72,7 @@ class Cell:UICollectionViewCell {
         facebook.setTitleColor(UIColor(white:0, alpha:0.2), for:.highlighted)
         facebook.layer.cornerRadius = 6
         facebook.titleLabel!.font = .systemFont(ofSize:13, weight:.bold)
+        facebook.addTarget(self, action:#selector(actionFacebook), for:.touchUpInside)
         contentView.addSubview(facebook)
         self.facebook = facebook
         
@@ -75,7 +81,6 @@ class Cell:UICollectionViewCell {
         donateMessage.isUserInteractionEnabled = false
         donateMessage.textAlignment = .center
         donateMessage.numberOfLines = 0
-        donateMessage.textColor = .black
         donateMessage.font = .systemFont(ofSize:14, weight:.medium)
         donate.addSubview(donateMessage)
         self.donateMessage = donateMessage
@@ -123,6 +128,7 @@ class Cell:UICollectionViewCell {
         refresh.setTitle(item.refreshMessage, for:[])
         facebook.setTitle(item.facebookMessage, for:[])
         updateImage()
+        donateStandby()
     }
     
     private func updateImage() {
@@ -157,5 +163,27 @@ class Cell:UICollectionViewCell {
         UIView.animate(withDuration:1.5) { [weak self] in
             self?.imageView.alpha = 1
         }
+    }
+    
+    @objc private func actionDonate() {
+        presenter?.donate()
+    }
+    
+    @objc private func actionRefresh() {
+        presenter?.refresh()
+    }
+    
+    @objc private func actionFacebook() {
+        presenter?.facebook()
+    }
+    
+    @objc private func donateHighlighted() {
+        donate.backgroundColor = .black
+        donateMessage.textColor = .white
+    }
+    
+    @objc private func donateStandby() {
+        donate.backgroundColor = .white
+        donateMessage.textColor = .black
     }
 }

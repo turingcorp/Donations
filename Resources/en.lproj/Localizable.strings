@@ -1,2 +1,5 @@
 View.refresh="Refresh";
+View.continueButton="Continue";
+View.alert="Donations";
 Presenter.loading="Loading, please wait...";
+Presenter.donatedMessage="Thank you for your donation!";

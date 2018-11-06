@@ -14,6 +14,12 @@ class View:UIViewController, UICollectionViewDelegate, UICollectionViewDataSourc
         presenter.update = { [weak self] viewModel in
             self?.update(viewModel:viewModel)
         }
+        presenter.open = { url in
+            UIApplication.shared.openURL(url)
+        }
+        presenter.alert = { [weak self] message in
+            self?.alert(message:message)
+        }
         presenter.refresh()
     }
     
@@ -40,6 +46,7 @@ class View:UIViewController, UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_:UICollectionView, cellForItemAt index:IndexPath) -> UICollectionViewCell {
         let cell = collection.dequeueReusableCell(withReuseIdentifier:"cell", for:index) as! Cell
         cell.item = items[index.item]
+        cell.presenter = presenter
         return cell
     }
     
@@ -123,10 +130,18 @@ class View:UIViewController, UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     private func update(viewModel:ViewModel) {
+        collection.scrollRectToVisible(CGRect(x:0, y:0, width:1, height:1), animated:true)
         message.text = viewModel.message
         refresh.isHidden = viewModel.refreshHidden
         indicator.isHidden = viewModel.indicatorHidden
         items = viewModel.items
         collection.reloadData()
+    }
+    
+    private func alert(message:String) {
+        let view = UIAlertController(title:NSLocalizedString("View.alert", comment:String()), message:message,
+                                     preferredStyle:.alert)
+        view.addAction(UIAlertAction(title:NSLocalizedString("View.continueButton", comment:String()), style:.default))
+        present(view, animated:true)
     }
 }
