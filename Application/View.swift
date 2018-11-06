@@ -93,6 +93,7 @@ class View:UIViewController, UICollectionViewDelegate, UICollectionViewDataSourc
         collection.delegate = self
         collection.dataSource = self
         collection.showsHorizontalScrollIndicator = false
+        collection.decelerationRate = .fast
         collection.register(Cell.self, forCellWithReuseIdentifier:"cell")
         view.addSubview(collection)
         self.collection = collection
