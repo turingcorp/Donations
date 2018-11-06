@@ -36,14 +36,34 @@ class Presenter:Delegate {
     
     private func donations(list:List) -> ViewModel {
         var viewModel = ViewModel()
-        viewModel.items = list.items.map { donation in
-            let item = Item(url:donation.imageUrl)
-            if let text = try? NSAttributedString(data:donation.htmlText.data(using:.utf8)!, options:
-                [.documentType:NSAttributedString.DocumentType.html], documentAttributes:nil) {
-                item.text = text
-            }
-            return item
-        }
+        viewModel.items = list.items.map { return itemFor(donation:$0) }
         return viewModel
+    }
+    
+    private func itemFor(donation:Donation) -> Item {
+        let item = Item(url:donation.imageUrl)
+        item.text = stringFor(htmlText:donation.htmlText)
+        donation.buttons.forEach { button in
+            switch button.action {
+            case .donate:
+                item.donateHidden = false
+                item.donateMessage = button.text
+            case .refresh:
+                item.refreshHidden = false
+                item.refreshMessage = button.text
+            case .facebook:
+                item.facebookHidden = false
+                item.facebookMessage = button.text
+            }
+        }
+        return item
+    }
+    
+    private func stringFor(htmlText:String) -> NSAttributedString {
+        if let string = try? NSAttributedString(data:htmlText.data(using:.utf8)!, options:
+            [.documentType:NSAttributedString.DocumentType.html], documentAttributes:nil) {
+            return string
+        }
+        return NSAttributedString()
     }
 }
