@@ -1,1 +1,2 @@
 View.refresh="Refresh";
+Presenter.loading="Loading, please wait...";

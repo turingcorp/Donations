@@ -1,6 +1,7 @@
 import UIKit
 
 class View:UIViewController {
+    private var items = [Item]()
     private let presenter = Presenter()
     private weak var indicator:UIActivityIndicatorView!
     private weak var message:UILabel!
@@ -9,6 +10,9 @@ class View:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         makeOutlets()
+        presenter.update = { [weak self] viewModel in
+            self?.update(viewModel:viewModel)
+        }
         presenter.refresh()
     }
     
@@ -18,7 +22,6 @@ class View:UIViewController {
         indicator.startAnimating()
         view.addSubview(indicator)
         self.indicator = indicator
-        
         
         let message = UILabel()
         message.translatesAutoresizingMaskIntoConstraints = false
@@ -53,5 +56,12 @@ class View:UIViewController {
         refresh.centerXAnchor.constraint(equalTo:view.centerXAnchor).isActive = true
         refresh.widthAnchor.constraint(equalToConstant:130).isActive = true
         refresh.heightAnchor.constraint(equalToConstant:38).isActive = true
+    }
+    
+    private func update(viewModel:ViewModel) {
+        message.text = viewModel.message
+        refresh.isHidden = viewModel.refreshHidden
+        indicator.isHidden = viewModel.indicatorHidden
+        items = viewModel.items
     }
 }
